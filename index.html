@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hebbal Convention & Party Hall</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function bookVenue() {
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value;
+    let date = document.getElementById("date").value;
+
+    if (name && email && phone && date) {
+        fetch("https://script.google.com/macros/s/AKfycbyiqyim60fyXQU3HRhfnNWcDWKqrbABWHuYsApzaIkIrhKhzzncR1WpT4HdProFx6t-/exec", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams({ name, email, phone, date })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "booked") {
+                alert("Booking has already been confirmed for this date. Please select a different date.");
+            } else {
+                alert("Booking confirmed successfully!");
+                // Clear input fields after successful submission
+                document.getElementById("name").value = "";
+                document.getElementById("email").value = "";
+                document.getElementById("phone").value = "";
+                document.getElementById("date").value = "";
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    } else {
+        alert("Please fill all fields");
+    }
+}
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Hebbal Convention & Party Hall</h1>
+        <p>Your perfect venue for grand celebrations</p>
+    </header>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#booking">Book Venue</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Located in the heart of Hebbal, our convention hall is perfect for weddings, corporate events, and special occasions.</p>
+        <p><strong>Opening Hours:</strong> We are open all days from 9 AM to 10 PM.</p>
+    </section>
+    <section id="services">
+        <h2>Our Services</h2>
+        <ul>
+            <li>Wedding & Reception Venue</li>
+            <li>Corporate Events</li>
+            <li>Birthday Parties</li>
+            <li>Catering & Decoration</li>
+            <li>On-Site Services</li>
+            <li>Gender Neutral Toilets</li>
+            <li>Restrooms</li>
+            <li>Free Parking</li>
+            <li>On-Site Parking</li>
+        </ul>
+    </section>
+    <section id="gallery">
+        <h2>Gallery</h2>
+        <div class="gallery">
+            <img src="image1.jpeg" alt="Event Hall">
+            <img src="image2.jpeg" alt="Party Setup">
+            <img src="image3.jpeg" alt="Banquet Hall">
+            <img src="image4.jpeg" alt="Wedding Setup">
+            <img src="image5.jpeg" alt="Corporate Event">
+            <img src="image6.jpeg" alt="Birthday Celebration">
+            <img src="image7.jpeg" alt="Conference Room">
+        </div>
+    </section>
+    <section id="booking">
+        <h2>Book Our Venue</h2>
+        <form onsubmit="event.preventDefault(); bookVenue();">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" required><br>
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" required pattern="[0-9]{10}" placeholder="Enter 10-digit phone number"><br>
+            <label for="date">Event Date:</label>
+            <input type="date" id="date" required><br>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Email: hebbalconventionandpartyhall@gmail.com | Phone: 9353101166 / 9113613377</p>
+    </section>
+    <footer>
+        <p>&copy; 2025 Hebbal Convention & Party Hall. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
